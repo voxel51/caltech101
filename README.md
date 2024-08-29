@@ -12,7 +12,7 @@ This version contains image-level labels only.
 
 ## Details
 
--   Dataset name: ``brimoor/caltech101``
+-   Dataset name: ``voxel51/caltech101``
 -   Dataset source: https://data.caltech.edu/records/mzrjq-6wc02
 -   Dataset size: 25.20 GB
 -   Number of images: 9,145
@@ -24,7 +24,7 @@ This version contains image-level labels only.
 import fiftyone as fo
 import fiftyone.zoo as foz
 
-dataset = foz.load_zoo_dataset("https://github.com/brimoor/caltech101")
+dataset = foz.load_zoo_dataset("https://github.com/voxel51/caltech101")
 
 session = fo.launch_app(dataset)
 ```
