@@ -7,6 +7,7 @@ Caltech 101 dataset.
 """
 import logging
 import os
+import shutil
 
 import eta.core.utils as etau
 import eta.core.web as etaw
@@ -46,7 +47,7 @@ def download_and_prepare(dataset_dir):
         scratch_dir,
     )
 
-    etau.delete_dir(scratch_dir)
+    shutil.rmtree(scratch_dir, ignore_errors=True)
 
     # The data is stored on disk in
     dataset_type = fot.ImageClassificationDirectoryTree
@@ -61,10 +62,23 @@ def _download_and_extract_archive(
     fid, archive_name, dir_in_archive, dataset_dir, scratch_dir
 ):
     archive_path = os.path.join(scratch_dir, archive_name)
-
-    logger.info("Downloading dataset...")
-    etaw.download_google_drive_file(fid, path=archive_path)
+    if os.path.isfile(archive_path):
+        logger.info("Using existing archive '%s'", archive_path)
+    else:
+        logger.info("Downloading dataset...")
+        etaw.download_google_drive_file(fid, path=archive_path)
 
     logger.info("Extracting archive...")
     etau.extract_archive(archive_path)
     _move_dir(os.path.join(scratch_dir, dir_in_archive), dataset_dir)
+
+
+def _move_dir(src, dst):
+    for f in os.listdir(src):
+        _dst = os.path.join(dst, f)
+        if os.path.isfile(_dst):
+            os.remove(_dst)
+        elif os.path.isdir(_dst):
+            shutil.rmtree(_dst, ignore_errors=True)
+
+        shutil.move(os.path.join(src, f), dst)
