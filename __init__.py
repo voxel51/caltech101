@@ -14,7 +14,6 @@ import eta.core.web as etaw
 
 import fiftyone as fo
 import fiftyone.types as fot
-import fiftyone.utils.data as foud
 
 
 logger = logging.getLogger(__name__)
@@ -49,11 +48,12 @@ def download_and_prepare(dataset_dir):
 
     shutil.rmtree(scratch_dir, ignore_errors=True)
 
-    # The data is stored on disk in
+    # The data is stored on disk as a classification directory tree
     dataset_type = fot.ImageClassificationDirectoryTree
-    importer = foud.ImageClassificationDirectoryTreeImporter
-    num_samples = importer._get_num_samples(dataset_dir)
-    classes = importer._get_classes(dataset_dir)
+    num_samples = len(etau.list_files(dataset_dir, recursive=True))
+    classes = sorted(
+        c in c in etau.list_subdirs(dataset_dir) if c != "__pycache__"
+    )
 
     return dataset_type, num_samples, classes
 
