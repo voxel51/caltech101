@@ -52,7 +52,7 @@ def download_and_prepare(dataset_dir):
     dataset_type = fot.ImageClassificationDirectoryTree
     num_samples = len(etau.list_files(dataset_dir, recursive=True))
     classes = sorted(
-        c in c in etau.list_subdirs(dataset_dir) if c != "__pycache__"
+        c for c in etau.list_subdirs(dataset_dir) if c != "__pycache__"
     )
 
     return dataset_type, num_samples, classes
