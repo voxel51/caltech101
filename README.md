@@ -15,7 +15,7 @@ This version contains image-level labels only.
 -   Dataset name: ``brimoor/caltech101``
 -   Dataset source: https://data.caltech.edu/records/mzrjq-6wc02
 -   Dataset size: 25.20 GB
--   Number of images: 9,146
+-   Number of images: 9,145
 -   Tags: ``image, classification``
 
 ## Example usage
