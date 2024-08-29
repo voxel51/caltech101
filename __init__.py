@@ -47,13 +47,12 @@ def download_and_prepare(dataset_dir):
     )
 
     shutil.rmtree(scratch_dir, ignore_errors=True)
+    shutil.rmtree(os.path.join(dataset_dir, "__pycache__"), ignore_errors=True)
 
     # The data is stored on disk as a classification directory tree
     dataset_type = fot.ImageClassificationDirectoryTree
     num_samples = len(etau.list_files(dataset_dir, recursive=True))
-    classes = sorted(
-        c for c in etau.list_subdirs(dataset_dir) if c != "__pycache__"
-    )
+    classes = etau.list_subdirs(dataset_dir)
 
     return dataset_type, num_samples, classes
 
