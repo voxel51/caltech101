@@ -4,7 +4,7 @@ author: Fei-Fei1 Li, Marco Andreeto, Marc'Aurelio Ranzato, Pietro Perona
 version: 1.0.0
 url: https://github.com/voxel51/caltech101
 source: https://data.caltech.edu/records/mzrjq-6wc02
-license: Creative Commons Attribution 4.0 International
+license: CC-BY-4.0
 description: The Caltech 101 dataset
 fiftyone:
   version: "*"
